@@ -25,4 +25,10 @@ explore: loans {
     relationship: many_to_one
     sql_on: ${lenders.permanent_name} = ${loans_lenders.lender};;
   }
+  join: loan_words {
+    view_label: "Words"
+    type: left_outer
+    sql_on: ${loans.loan_id} = ${loan_words.loan_id} ;;
+    relationship: one_to_many
+  }
 }

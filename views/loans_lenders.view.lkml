@@ -1,3 +1,10 @@
+#############################################################################################################
+# Owner: Izzy Miller
+# Created: May 14 2020
+# Purpose: Passthrough lookup table to join lenders and loans.
+#############################################################################################################
+
+
 view: loans_lenders {
   derived_table: {
     sql:
@@ -11,12 +18,18 @@ view: loans_lenders {
     sql_trigger_value: SELECT MAX(LOAN_ID) FROM `lookerdata.kiva_20.loans_lenders`  ;;
   }
 
+###### Primary Keys (A→Z) #########
+
   dimension: pk {
     type: string
     hidden: yes
     primary_key: yes
     sql: CONCAT(${loan_id}::string,${lender}) ;;
   }
+
+###### Foreign Keys (A→Z) #########
+
+###### Dimensions (A→Z) #########
 
 
   dimension: lenders_arr {
@@ -39,12 +52,10 @@ view: loans_lenders {
     sql: ${TABLE}.LOAN_ID ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
+###### Measures (A→Z) #########
 
-  # ----- Sets of fields for drilling ------
+###### Sets (A→Z) #########
+
   set: detail {
     fields: [
       loans.activity_name,
