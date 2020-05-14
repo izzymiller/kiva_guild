@@ -123,6 +123,7 @@ view: loans {
     description: "Description of the Loan"
     type: string
     sql: ${TABLE}.DESCRIPTION ;;
+    drill_fields: [detail*]
   }
 
   dimension: description_translated {
@@ -416,7 +417,8 @@ view: loans {
       country_name,
       town_name,
       lenders.permanent_name,
-      lenders.country_code
+      lenders.country_code,
+      is_partner_loan
     ]
   }
 }
