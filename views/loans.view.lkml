@@ -41,6 +41,7 @@ view: loans {
   }
 
   dimension: borrower_genders_bucket {
+    view_label: "Borrower"
     type: string
     description: "Bucketing Borrow Genders as there can be multiple borrower_genders for a single loan"
     sql: CASE
@@ -52,6 +53,7 @@ view: loans {
   }
 
   dimension: number_of_borrowers {
+    view_label: "Borrower"
     type: number
     description: "Multiple Borrowers per loan"
     sql: ARRAY_LENGTH(SPLIT(${TABLE}.BORROWER_GENDERS, ",")) ;;
@@ -82,6 +84,10 @@ view: loans {
     description: "2 letter country code of Borrower"
     type: string
     sql: ${TABLE}.COUNTRY_CODE ;;
+    html: <div>
+            <img src="https://www.countryflags.io/{{value}}/shiny/64.png">
+            <b>{{country_name._rendered_value}}</b>
+          </div>;;
   }
 
   dimension: country_name {
