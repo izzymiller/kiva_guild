@@ -24,6 +24,7 @@ datagroup_trigger: kiva_default_datagroup
   dimension: word {
     type: string
     sql: ${TABLE}.word ;;
+    drill_fields: [detail*]
   }
 
   dimension: is_stopword {
@@ -33,5 +34,10 @@ datagroup_trigger: kiva_default_datagroup
 
   measure: count {
     type: count
+    drill_fields: [detail*]
   }
+
+  set: detail {
+   fields: [loans.loan_id,loans.posted,loans.status,loans.loan_name,loans.country_name,loans.loan_use,word,is_stopword,loans.description,]
   }
+}

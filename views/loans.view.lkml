@@ -395,6 +395,7 @@ view: loans {
     type: sum
     value_format_name: usd
     sql: ${TABLE}.LOAN_AMOUNT ;;
+    drill_fields: [detail*]
   }
 
   measure: funded {
@@ -402,6 +403,7 @@ view: loans {
     type: sum
     value_format_name: usd
     sql: ${TABLE}.FUNDED_AMOUNT ;;
+    drill_fields: [detail*]
   }
 
 ###### Sets (A→Z) #########
@@ -413,7 +415,8 @@ view: loans {
       category,
       country_name,
       town_name,
-      loans_lenders.count
+      lenders.permanent_name,
+      lenders.country_code
     ]
   }
 }

@@ -12,6 +12,7 @@ persist_with: kiva_default_datagroup
 
 
 explore: loans {
+  view_label: "Loan"
   description: "Contains all information about microloans and lenders."
   join: loans_lenders {
     #Pass through lookup table.
@@ -21,6 +22,7 @@ explore: loans {
     sql_on: ${loans.loan_id} = ${loans_lenders.loan_id} ;;
   }
   join: lenders {
+    view_label: "Lender"
     type: full_outer
     relationship: many_to_one
     sql_on: ${lenders.permanent_name} = ${loans_lenders.lender};;
