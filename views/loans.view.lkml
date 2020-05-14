@@ -30,6 +30,8 @@ view: loans {
     sql: ${TABLE}.ACTIVITY_NAME ;;
   }
 
+  ### borrower gender related fields
+
   dimension: borrower_genders {
     view_label: "Borrower"
     label: "Gender"
@@ -37,6 +39,25 @@ view: loans {
     type: string
     sql: ${TABLE}.BORROWER_GENDERS ;;
   }
+
+  dimension: borrower_genders_bucket {
+    type: string
+    description: "Bucketing Borrow Genders as there can be multiple borrower_genders for a single loan"
+    sql: CASE
+            WHEN ${TABLE}.BORROWER_GENDERS LIKE "male" AND ${TABLE}.BORROWER_GENDERS NOT LIKE "female"
+            THEN "male_only"
+            WHEN SUBSTR(${TABLE}.BORROWER_GENDERS,0,1) = "f" AND ${TABLE}.BORROWER_GENDERS NOT LIKE "% male%" AND ${TABLE}.BORROWER_GENDERS NOT LIKE "%,male%"  then "female_only"
+            WHEN ${TABLE}.BORROWER_GENDERS = "" then NULL
+        ELSE "male_female" END;;
+  }
+
+  dimension: number_of_borrowers {
+    type: number
+    description: "Multiple Borrowers per loan"
+    sql: ARRAY_LENGTH(SPLIT(${TABLE}.BORROWER_GENDERS, ",")) ;;
+  }
+
+  #### end
 
   dimension: borrower_names {
     #Potential project: split out the names!
