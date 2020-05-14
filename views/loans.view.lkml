@@ -41,7 +41,7 @@ view: loans {
   dimension: borrower_names {
     #Potential project: split out the names!
     view_label: "Borrower"
-    label: "Names"
+    label: "All Names"
     description: "Name(s) of Borrowers. Some have multiple, most have 1."
     type: string
     sql: ${TABLE}.BORROWER_NAMES ;;
@@ -142,13 +142,13 @@ view: loans {
     }
   }
 
-  dimension: funded_amount {
-    label: "Funded Amount"
-    description: "Amount of the requested Loan that has been funded so far"
-    type: number
-    value_format_name: usd
-    sql: ${TABLE}.FUNDED_AMOUNT ;;
-  }
+#   dimension: funded_amount {
+#     label: "Funded Amount"
+#     description: "Amount of the requested Loan that has been funded so far"
+#     type: number
+#     value_format_name: usd
+#     sql: ${TABLE}.FUNDED_AMOUNT ;;
+#   }
 
   dimension: has_image {
     label: "Has Image?"
@@ -164,18 +164,18 @@ view: loans {
     sql: ${TABLE}.LENDER_TERM ;;
   }
 
-  dimension: loan_amount {
-    label: "Loan Amount"
-    description: "Total amount requested"
-    type: number
-    value_format_name: usd
-    sql: ${TABLE}.LOAN_AMOUNT ;;
-  }
+#   dimension: loan_amount {
+#     label: "Loan Amount"
+#     description: "Total amount requested"
+#     type: number
+#     value_format_name: usd
+#     sql: ${TABLE}.LOAN_AMOUNT ;;
+#   }
 
   dimension: loan_name {
     view_label: "Borrower"
-    label: "Name"
-    description: "Name of Borrower"
+    label: "Primary Name"
+    description: "Name of Primary Borrower"
     type: string
     sql: ${TABLE}.LOAN_NAME ;;
   }
@@ -350,12 +350,35 @@ view: loans {
     sql: ${TABLE}.VIDEO_ID is not null ;;
   }
 
+###### Measures (A→Z) #########
+
   measure: count {
     type: count
     drill_fields: [detail*]
   }
 
-  # ----- Sets of fields for drilling ------
+  measure: rolled_tags_agg {
+    label: "Aggregated Tags"
+    type: string
+    description: "Aggregate of rolled tags for selected loans"
+    sql: STRING_AGG(${tags}) ;;
+  }
+
+  measure: loan_amount {
+    description: "Full requested amount of loan"
+    type: sum
+    value_format_name: usd
+    sql: ${TABLE}.LOAN_AMOUNT ;;
+  }
+
+  measure: funded {
+    description: "Amount of loan funded so far"
+    type: sum
+    value_format_name: usd
+    sql: ${TABLE}.FUNDED_AMOUNT ;;
+  }
+
+###### Sets (A→Z) #########
   set: detail {
     fields: [
       loan_id,
