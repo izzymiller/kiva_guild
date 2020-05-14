@@ -7,7 +7,6 @@
 
 view: loans {
   sql_table_name: kiva_20.loans ;;
-  drill_fields: [loan_id]
 
 ###### Primary Keys (A→Z) #########
 
