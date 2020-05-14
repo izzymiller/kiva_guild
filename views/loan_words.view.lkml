@@ -38,6 +38,6 @@ datagroup_trigger: kiva_default_datagroup
   }
 
   set: detail {
-   fields: [loans.loan_id,loans.posted,loans.status,loans.loan_name,loans.country_name,loans.loan_use,word,is_stopword,loans.description,]
+   fields: [loans.loan_id,loans.status,loans.loan_amount,loans.country_name,loans.loan_use,word,is_stopword,loans.description]
   }
 }
