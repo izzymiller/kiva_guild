@@ -28,7 +28,7 @@ explore: loans {
     sql_on: ${lenders.permanent_name} = ${loans_lenders.lender};;
   }
   join: loan_words {
-    view_label: "Words"
+    view_label: "Words (from Description)"
     type: left_outer
     sql_on: ${loans.loan_id} = ${loan_words.loan_id} ;;
     relationship: one_to_many
