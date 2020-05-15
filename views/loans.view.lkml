@@ -99,6 +99,25 @@ view: loans {
     map_layer_name: countries
   }
 
+  ### to use with comparitor analysis ###
+
+  filter: country_select {
+    type: string
+    suggest_dimension: country_name
+  }
+
+  dimension: country_comparitor {
+    description: "Pivot on this field. Use with country_select filter to compare multipe countries to the rest of the population (i.e. rest of countries)"
+    type: string
+    sql: CASE
+          WHEN {% condition country_select %} ${country_name} {% endcondition %} AND ${comparitor.n} = 1
+           THEN ${country_name}
+          ELSE "Rest of Countries"
+         END;;
+  }
+
+  ### end ###
+
   dimension: currency {
     label: "Currency"
     description: "Currency of Loan"
@@ -407,6 +426,13 @@ view: loans {
     value_format_name: usd
     sql: ${TABLE}.FUNDED_AMOUNT ;;
     drill_fields: [detail*]
+  }
+
+  measure: percentage_funded {
+    description: "Percentage funded of loan"
+    type: number
+    value_format: "0.00\%"
+    sql: ${funded}/${loan_amount} * 100 ;;
   }
 
 ###### Sets (A→Z) #########
