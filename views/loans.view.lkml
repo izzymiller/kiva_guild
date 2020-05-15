@@ -87,6 +87,7 @@ view: loans {
             <img src="https://www.countryflags.io/{{value}}/shiny/64.png">
             <b>{{country_name._rendered_value}}</b>
           </div>;;
+    map_layer_name: countries
   }
 
   dimension: country_name {
@@ -95,6 +96,7 @@ view: loans {
     description: "Full country name of borrower"
     type: string
     sql: ${TABLE}.COUNTRY_NAME ;;
+    map_layer_name: countries
   }
 
   dimension: currency {
