@@ -74,7 +74,7 @@ view: loans {
     label: "Has picture?"
     description: "Does the borrower have a displayed picture?"
     type: yesno
-    sql: ${TABLE}.BORROWER_PICTURED = true ;;
+    sql: ${TABLE}.BORROWER_PICTURED = "true" ;;
   }
 
   dimension: country_code {
