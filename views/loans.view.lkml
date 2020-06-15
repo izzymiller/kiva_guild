@@ -409,6 +409,29 @@ view: loans {
     drill_fields: [detail*]
   }
 
+  measure: count_funded {
+    description: "Count of funded loans"
+    type: count
+    filters: [status: "Funded"]
+    drill_fields: [detail*]
+  }
+
+  measure: count_expired {
+    description: "Count of funded loans"
+    type: count
+    filters: [status: "Expired"]
+    drill_fields: [detail*]
+  }
+
+  measure: percent_funded {
+    description: "Percentage of loans that reached funded status"
+    value_format_name: percent_1
+    type: number
+    sql: ${count_funded}/${count} ;;
+    drill_fields: [detail*]
+  }
+
+
   measure: funded {
     description: "Amount of loan funded so far"
     type: sum
