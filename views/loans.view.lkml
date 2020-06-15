@@ -451,7 +451,8 @@ view: loans {
       town_name,
       lenders.permanent_name,
       lenders.country_code,
-      is_partner_loan
+      is_partner_loan,
+      description
     ]
   }
 }
