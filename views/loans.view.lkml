@@ -408,6 +408,15 @@ view: loans {
     drill_fields: [detail*]
   }
 
+  measure: loan_amount_funded {
+    description: "Full funded amount of loan"
+    type: sum
+    value_format_name: usd
+    sql: ${TABLE}.LOAN_AMOUNT ;;
+    filters: [status: "Funded"]
+    drill_fields: [detail*]
+  }
+
   measure: avg_loan_amount {
     description: "Average requested amount of loan"
     type: average
