@@ -22,6 +22,13 @@ view: loans {
 
 ###### Dimensions (A→Z) #########
 
+  dimension: link {
+    label: "Link"
+    type: number
+    sql: ${TABLE}.LOAN_ID ;;
+    html: <a href="https://www.kiva.org/lend/{{value}}" target="_blank"><button>Link to Kiva</button></a>;;
+  }
+
   dimension: activity_name {
     label: "Activity"
     description: "Category of Activity the loan is requested for"
@@ -425,10 +432,10 @@ view: loans {
     drill_fields: [detail*]
   }
 
-  measure: count_expired {
+  measure: count_not_funded {
     description: "Count of funded loans"
     type: count
-    filters: [status: "Expired"]
+    filters: [status: "-Funded"]
     drill_fields: [detail*]
   }
 
@@ -453,6 +460,7 @@ view: loans {
   set: detail {
     fields: [
       loan_id,
+      link,
       activity_name,
       loan_name,
       category,
@@ -461,7 +469,9 @@ view: loans {
       lenders.permanent_name,
       lenders.country_code,
       is_partner_loan,
-      description
+      description,
+      status,
+      loan_amount
     ]
   }
 }
