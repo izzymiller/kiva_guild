@@ -386,6 +386,14 @@ view: loans {
     sql: ${TABLE}.VIDEO_ID is not null ;;
   }
 
+  dimension: loan_amount {
+    description: "Full requested amount of loan"
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.LOAN_AMOUNT ;;
+    drill_fields: [detail*]
+  }
+
 ###### Measures (A→Z) #########
 
   measure: count {
@@ -400,11 +408,11 @@ view: loans {
     sql: STRING_AGG(${tags}) ;;
   }
 
-  measure: loan_amount {
+  measure: sum_loan_amount {
     description: "Full requested amount of loan"
     type: sum
     value_format_name: usd
-    sql: ${TABLE}.LOAN_AMOUNT ;;
+    sql: ${loan_amount} ;;
     drill_fields: [detail*]
   }
 
