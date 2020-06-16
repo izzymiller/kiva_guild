@@ -50,6 +50,6 @@ WHERE ((word IS NOT NULL AND LENGTH(word ) <> 0 ))
   }
 
   set: detail {
-    fields: [permanent_name, lender.loan_because, loan.count]
+    fields: [permanent_name, lender.loan_because, loan.count, loan.avg_loan_amount_funded]
   }
 }

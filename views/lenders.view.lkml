@@ -35,8 +35,8 @@ view: lenders {
     type: string
     sql: ${TABLE}.COUNTRY_CODE ;;
     html: <div>
-            <img src="https://www.countryflags.io/{{value}}/shiny/64.png">
-            <b>{{value}}</b>
+            <img src="https://www.countryflags.io/{{value}}/shiny/32.png">
+            <b>{{rendered_value}}</b>
           </div>;;
     map_layer_name: countries
   }

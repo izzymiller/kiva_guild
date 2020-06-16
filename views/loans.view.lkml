@@ -84,7 +84,7 @@ view: loans {
     type: string
     sql: ${TABLE}.COUNTRY_CODE ;;
     html: <div>
-            <img src="https://www.countryflags.io/{{value}}/shiny/64.png">
+            <img src="https://www.countryflags.io/{{value}}/shiny/32.png">
             <b>{{country_name._rendered_value}}</b>
           </div>;;
     map_layer_name: countries
@@ -238,8 +238,8 @@ view: loans {
   dimension: original_language {
     description: "Original language of the loan, if not English"
     type: string
-    sql: ${TABLE}.ORIGINAL_LANGUAGE ;;
-  }
+    sql: IFNULL(NULLIF(${TABLE}.ORIGINAL_LANGUAGE, ''),'No description');;
+     }
 
   dimension: is_partner_loan {
     description: "Is field partner involved?"
