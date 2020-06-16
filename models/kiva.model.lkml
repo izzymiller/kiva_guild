@@ -33,4 +33,10 @@ explore: loans {
     sql_on: ${loans.loan_id} = ${loan_words.loan_id} ;;
     relationship: one_to_many
   }
+  join: loan_because_words {
+    view_label: "Words (from Loan Reason)"
+    type: left_outer
+    sql_on: ${lenders.permanent_name} = ${loan_because_words.permanent_name} ;;
+    relationship: one_to_many
+  }
 }
