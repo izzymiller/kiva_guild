@@ -409,6 +409,15 @@ view: loans {
     drill_fields: [detail*]
   }
 
+  measure: avg_loan_amount_funded {
+    description: "Average funded amount of loan"
+    type: average
+    value_format_name: usd
+    sql: ${TABLE}.LOAN_AMOUNT ;;
+    filters: [status: "Funded"]
+    drill_fields: [detail*]
+  }
+
   measure: count_funded {
     description: "Count of funded loans"
     type: count
@@ -427,7 +436,7 @@ view: loans {
     description: "Percentage of loans that reached funded status"
     value_format_name: percent_1
     type: number
-    sql: ${count_funded}/${count} ;;
+    sql: ${count_funded}/nullif(${count},0) ;;
     drill_fields: [detail*]
   }
 
