@@ -31,9 +31,14 @@ view: lenders {
 
   dimension: country_code {
     label: "Country Code"
-    description: "2 letter Country Code"
+    description: "2 letter country code of lender"
     type: string
     sql: ${TABLE}.COUNTRY_CODE ;;
+    html: <div>
+            <img src="https://www.countryflags.io/{{value}}/shiny/64.png">
+            <b>{{value}}</b>
+          </div>;;
+    map_layer_name: countries
   }
 
   dimension: display_name {
