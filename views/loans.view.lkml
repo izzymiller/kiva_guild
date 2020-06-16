@@ -473,6 +473,48 @@ view: loans {
     drill_fields: [detail*]
   }
 
+  measure: min_loan_amount {
+    description: "Minimum loan amount"
+    type: min
+    value_format_name: usd
+    sql: ${loan_amount} ;;
+    drill_fields: [detail*]
+  }
+
+  measure: max_loan_amount {
+    description: "Maximum loan amount"
+    type: max
+    value_format_name: usd
+    sql: ${loan_amount} ;;
+    drill_fields: [detail*]
+  }
+
+  measure: median_loan_amount {
+    description: "Median loan amount"
+    type: median
+    value_format_name: usd
+    sql: ${loan_amount} ;;
+    drill_fields: [detail*]
+  }
+
+  measure: 25th_percentile_loan_amount {
+    description: "25th Percentile loan amount"
+    type: percentile
+    percentile: 25
+    value_format_name: usd
+    sql: ${loan_amount} ;;
+    drill_fields: [detail*]
+  }
+
+  measure: 75th_percentile_loan_amount {
+    description: "75th Percentile loan amount"
+    type: percentile
+    percentile: 75
+    value_format_name: usd
+    sql: ${loan_amount} ;;
+    drill_fields: [detail*]
+  }
+
 ###### Sets (A→Z) #########
   set: detail {
     fields: [
